@@ -5,8 +5,8 @@
  */
 
 // Componente para la tarjeta de filtro
-Vue.component('filter-card', {
-  props: ['filtro', 'categoria'],
+Vue.component("filter-card", {
+  props: ["filtro", "categoria"],
   template: `
     <div class="filter-card" :class="categoria" @click="$emit('click')">
       <div class="filter-header">
@@ -35,21 +35,29 @@ Vue.component('filter-card', {
   computed: {
     statusText() {
       switch (this.categoria) {
-        case 'recomendados': return 'Recomendado';
-        case 'adecuados': return 'Adecuado';
-        case 'noAdecuados': return 'No Adecuado';
-        default: return '';
+        case "recomendados":
+          return "Recomendado";
+        case "adecuados":
+          return "Adecuado";
+        case "noAdecuados":
+          return "No Adecuado";
+        default:
+          return "";
       }
     },
     affiliateLink() {
-      return 'https://www.amazon.es/dp/' + this.filtro.ASIN + '/?tag=TU_TAG_DE_AFILIADO-21'; 
-    }
-  }
+      return (
+        "https://www.amazon.es/dp/" +
+        this.filtro.ASIN +
+        "/?tag=TU_TAG_DE_AFILIADO-21"
+      );
+    },
+  },
 });
 
 // Componente para el modal
-Vue.component('filter-modal', {
-  props: ['filtro'],
+Vue.component("filter-modal", {
+  props: ["filtro"],
   template: `
     <div id="filterModal" class="modal" role="dialog" aria-labelledby="modalTitle" v-if="filtro">
       <div class="modal-content">
@@ -104,15 +112,15 @@ Vue.component('filter-modal', {
     },
     mechanicalPercentage() {
       return 10;
-    }
-  }
+    },
+  },
 });
 
 new Vue({
-  el: '#app',
+  el: "#app",
   data: {
-    version: '2.1.1',
-    inputMode: 'dimensions',
+    version: "2.1.1",
+    inputMode: "dimensions",
     length: null,
     width: null,
     height: null,
@@ -122,26 +130,30 @@ new Vue({
     filtros: {
       recomendados: [],
       adecuados: [],
-      noAdecuados: []
+      noAdecuados: [],
     },
     stats: {
       totalFilters: 0,
       recommendedFilters: 0,
       suitableFilters: 0,
-      unsuitableFilters: 0
+      unsuitableFilters: 0,
     },
     tankInfo: null,
     specialMessages: [],
-    currentTab: 'recomendados',
-    currentView: 'grid',
+    currentTab: "recomendados",
+    currentView: "grid",
     showModal: false,
     selectedFilter: null,
     tips: [
-      { message: "🔄 Mantenimiento del material biológico: Cambia solo un 25% del material biológico 'viejo' por 'nuevo' durante las limpiezas del filtro. ¡Nunca lo cambies todo de golpe! Algunos materiales pierden eficacia con el tiempo al obstruirse sus poros.", icon: "🔄" },
+      {
+        message:
+          "🔄 Mantenimiento del material biológico: Cambia solo un 25% del material biológico 'viejo' por 'nuevo' durante las limpiezas del filtro. ¡Nunca lo cambies todo de golpe! Algunos materiales pierden eficacia con el tiempo al obstruirse sus poros.",
+        icon: "🔄",
+      },
       // ... (resto de los mensajes de `Messages.TIPS`) ...
     ],
     currentTipIndex: 0,
-    currentTip: {}
+    currentTip: {},
   },
   mounted() {
     this.showRandomTip();
@@ -153,31 +165,38 @@ new Vue({
     },
     async handleFormSubmit() {
       this.errorMessage = null;
-      this.showResults = false; 
+      this.showResults = false;
 
       let formData = {};
-      if (this.inputMode === 'dimensions') {
+      if (this.inputMode === "dimensions") {
         if (!this.length || !this.width || !this.height) {
-          this.errorMessage = 'Por favor, introduce todas las dimensiones.';
+          this.errorMessage = "Por favor, introduce todas las dimensiones.";
           return;
         }
-        formData = { length: this.length, width: this.width, height: this.height };
+        formData = {
+          length: this.length,
+          width: this.width,
+          height: this.height,
+        };
       } else {
         if (!this.aquariumVolume) {
-          this.errorMessage = 'Por favor, introduce el volumen.';
+          this.errorMessage = "Por favor, introduce el volumen.";
           return;
         }
         formData = { volume: this.aquariumVolume };
       }
 
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwOM0eT0znOupFJ4fegXfjcs0lf40QywHzIpaOPrPGX9ifkOINUJhg2f2crYaK_0gWm/exec', { 
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        });
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbwOM0eT0znOupFJ4fegXfjcs0lf40QywHzIpaOPrPGX9ifkOINUJhg2f2crYaK_0gWm/exec",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          }
+        );
 
         const data = await response.json();
 
@@ -192,8 +211,8 @@ new Vue({
           this.errorMessage = data.error.userMessage;
         }
       } catch (error) {
-        this.errorMessage = 'Error al obtener los resultados.';
-        console.error('Error:', error);
+        this.errorMessage = "Error al obtener los resultados.";
+        console.error("Error:", error);
       }
     },
     switchResultTab(tab) {
@@ -215,7 +234,7 @@ new Vue({
     },
     findFilterById(id) {
       for (const categoria in this.filtros) {
-        const filtro = this.filtros[categoria].find(f => f.id === id);
+        const filtro = this.filtros[categoria].find((f) => f.id === id);
         if (filtro) {
           return filtro;
         }
@@ -231,10 +250,10 @@ new Vue({
       this.errorMessage = null;
     },
     showBanner() {
-      document.getElementById('disclaimerBanner').style.display = 'block';
+      document.getElementById("disclaimerBanner").style.display = "block";
     },
     hideBanner() {
-      document.getElementById('disclaimerBanner').style.display = 'none';
+      document.getElementById("disclaimerBanner").style.display = "none";
     },
     showRandomTip() {
       this.currentTipIndex = Math.floor(Math.random() * this.tips.length);
@@ -243,6 +262,6 @@ new Vue({
     showNextTip() {
       this.currentTipIndex = (this.currentTipIndex + 1) % this.tips.length;
       this.currentTip = this.tips[this.currentTipIndex];
-    }
-  }
+    },
+  },
 });

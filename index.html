@@ -1,127 +1,326 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Recomendador de Filtros para Acuarios - Una herramienta para aficionados">
-  <meta name="author" content="J. B. V.">
-  <meta name="last-modified" content="2025-02-14"> 
-  <meta name="version" content="2.1.1"> 
-  <title>Recomendador de Filtros para Acuarios</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div id="app"> 
-    <header class="app-header">
-      <h1>Recomendador de Filtros para Acuarios</h1>
-      <span class="app-version">v{{ version }}</span> 
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Recomendador de Filtros para Acuarios - Una herramienta para aficionados"
+    />
+    <meta name="author" content="J. B. V." />
+    <meta name="last-modified" content="2025-02-14" />
+    <meta name="version" content="2.1.1" />
+    <title>Recomendador de Filtros para Acuarios</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="app-header">
+        <h1>Recomendador de Filtros para Acuarios</h1>
+        <span class="app-version">v{{ version }}</span>
+      </header>
 
-    <div id="disclaimerBanner" class="disclaimer-banner">
-      <button @click="hideBanner" class="close-banner" aria-label="Cerrar">&times;</button>
-      <div class="disclaimer-content">
-        <i id="disclaimerIcon" class="disclaimer-icon" aria-label="Información">{{ currentTip.icon }}</i>
-        <div class="disclaimer-text">
-          <p id="disclaimerMessage">{{ currentTip.message }}</p> 
+      <div id="disclaimerBanner" class="disclaimer-banner">
+        <button @click="hideBanner" class="close-banner" aria-label="Cerrar">
+          &times;
+        </button>
+        <div class="disclaimer-content">
+          <i
+            id="disclaimerIcon"
+            class="disclaimer-icon"
+            aria-label="Información"
+            >{{ currentTip.icon }}</i
+          >
+          <div class="disclaimer-text">
+            <p id="disclaimerMessage">{{ currentTip.message }}</p>
+          </div>
         </div>
+        <button
+          @click="showNextTip"
+          id="nextTipButton"
+          class="next-tip-button"
+          aria-label="Siguiente consejo"
+        >
+          Siguiente Consejo
+        </button>
       </div>
-      <button @click="showNextTip" id="nextTipButton" class="next-tip-button" aria-label="Siguiente consejo">Siguiente Consejo</button> 
+
+      <main class="main-content">
+        <section class="calculator-section">
+          <div class="input-selector">
+            <button
+              @click="switchInputMode('dimensions')"
+              :class="{ active: inputMode === 'dimensions' }"
+              class="tab-button"
+              data-input="dimensions"
+            >
+              Por Dimensiones
+            </button>
+            <button
+              @click="switchInputMode('volume')"
+              :class="{ active: inputMode === 'volume' }"
+              class="tab-button"
+              data-input="volume"
+            >
+              Por Volumen
+            </button>
+          </div>
+
+          <form
+            id="calculatorForm"
+            class="calculator-form"
+            @submit.prevent="handleFormSubmit"
+          >
+            <div
+              id="dimensionsInput"
+              :class="{ active: inputMode === 'dimensions' }"
+              class="input-group"
+            >
+              <div class="form-group">
+                <label for="length">Largo (cm)</label>
+                <input
+                  type="number"
+                  id="length"
+                  name="length"
+                  v-model.number="length"
+                  min="1"
+                  step="0.1"
+                  :required="inputMode === 'dimensions'"
+                  aria-label="Largo del acuario en centímetros"
+                  placeholder="Ej: 100"
+                />
+              </div>
+              <div class="form-group">
+                <label for="width">Ancho (cm)</label>
+                <input
+                  type="number"
+                  id="width"
+                  name="width"
+                  v-model.number="width"
+                  min="1"
+                  step="0.1"
+                  :required="inputMode === 'dimensions'"
+                  aria-label="Ancho del acuario en centímetros"
+                  placeholder="Ej: 40"
+                />
+              </div>
+              <div class="form-group">
+                <label for="height">Alto (cm)</label>
+                <input
+                  type="number"
+                  id="height"
+                  name="height"
+                  v-model.number="height"
+                  min="1"
+                  step="0.1"
+                  :required="inputMode === 'dimensions'"
+                  aria-label="Alto del acuario en centímetros"
+                  placeholder="Ej: 50"
+                />
+              </div>
+            </div>
+
+            <div
+              id="volumeInput"
+              :class="{ active: inputMode === 'volume' }"
+              class="input-group"
+            >
+              <div class="form-group">
+                <label for="volume">Volumen (litros)</label>
+                <input
+                  type="number"
+                  id="volume"
+                  name="volume"
+                  v-model.number="aquariumVolume"
+                  min="1"
+                  step="0.1"
+                  :required="inputMode === 'volume'"
+                  aria-label="Volumen del acuario en litros"
+                  placeholder="Ej: 200"
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="calculate-button">
+              Calcular <span class="button-icon">→</span>
+            </button>
+          </form>
+        </section>
+
+        <section id="resultsSection" class="results-section" v-if="showResults">
+          <div id="summarySection" class="summary-section">
+            <h2>Resumen de Filtros</h2>
+            <p>
+              Total de filtros en base de datos encontrados:
+              <span class="total-filters">{{ stats.totalFilters }}</span>
+            </p>
+            <p>
+              Filtros recomendados:
+              <span class="recommended-filters"
+                >{{ stats.recommendedFilters }}</span
+              >
+            </p>
+            <p>
+              Filtros adecuados:
+              <span class="suitable-filters">{{ stats.suitableFilters }}</span>
+            </p>
+            <p>
+              Filtros no recomendados:
+              <span class="unsuitable-filters"
+                >{{ stats.unsuitableFilters }}</span
+              >
+            </p>
+          </div>
+
+          <div id="specialMessages" class="special-messages">
+            <p v-for="message in specialMessages">{{ message }}</p>
+          </div>
+
+          <div
+            id="error-message"
+            class="error-message"
+            role="alert"
+            v-if="errorMessage"
+          >
+            {{ errorMessage }}
+          </div>
+
+          <div class="results-tabs" role="tablist">
+            <button
+              @click="switchResultTab('recomendados')"
+              :class="{ active: currentTab === 'recomendados' }"
+              class="tab-button"
+              data-tab="recomendados"
+              role="tab"
+              aria-selected="true"
+            >
+              Recomendados
+            </button>
+            <button
+              @click="switchResultTab('adecuados')"
+              :class="{ active: currentTab === 'adecuados' }"
+              class="tab-button"
+              data-tab="adecuados"
+              role="tab"
+            >
+              Adecuados
+            </button>
+            <button
+              @click="switchResultTab('noAdecuados')"
+              :class="{ active: currentTab === 'noAdecuados' }"
+              class="tab-button"
+              data-tab="noAdecuados"
+              role="tab"
+            >
+              No Adecuados
+            </button>
+          </div>
+
+          <div class="view-selector" role="toolbar">
+            <button
+              @click="switchView('grid')"
+              :class="{ active: currentView === 'grid' }"
+              class="view-button"
+            >
+              🔲
+            </button>
+            <button
+              @click="switchView('list')"
+              :class="{ active: currentView === 'list' }"
+              class="view-button"
+            >
+              📋
+            </button>
+            <button
+              @click="switchView('table')"
+              :class="{ active: currentView === 'table' }"
+              class="view-button"
+            >
+              📊
+            </button>
+          </div>
+
+          <div
+            id="recomendadosContent"
+            class="tab-content"
+            :class="{ active: currentTab === 'recomendados' }"
+          >
+            <div
+              id="filterGridRecomendados"
+              class="filter-container"
+              :class="currentView + '-view'"
+            >
+              <filter-card
+                v-for="filtro in filtros.recomendados"
+                :key="filtro.id"
+                :filtro="filtro"
+                :categoria="'recomendados'"
+                @click.native="showFilterDetails(filtro.id)"
+              ></filter-card>
+            </div>
+          </div>
+
+          <div
+            id="adecuadosContent"
+            class="tab-content"
+            :class="{ active: currentTab === 'adecuados' }"
+          >
+            <div
+              id="filterGridAdecuados"
+              class="filter-container"
+              :class="currentView + '-view'"
+            >
+              <filter-card
+                v-for="filtro in filtros.adecuados"
+                :key="filtro.id"
+                :filtro="filtro"
+                :categoria="'adecuados'"
+                @click.native="showFilterDetails(filtro.id)"
+              ></filter-card>
+            </div>
+          </div>
+
+          <div
+            id="noAdecuadosContent"
+            class="tab-content"
+            :class="{ active: currentTab === 'noAdecuados' }"
+          >
+            <div
+              id="filterGridNoAdecuados"
+              class="filter-container"
+              :class="currentView + '-view'"
+            >
+              <filter-card
+                v-for="filtro in filtros.noAdecuados"
+                :key="filtro.id"
+                :filtro="filtro"
+                :categoria="'noAdecuados'"
+                @click.native="showFilterDetails(filtro.id)"
+              ></filter-card>
+            </div>
+          </div>
+
+          <div id="tankInfo" class="tank-info">
+            <div class="tank-info-container" v-if="tankInfo">
+              <p>
+                <strong>Volumen del acuario:</strong> {{ tankInfo.volumen }} L
+              </p>
+              <p>
+                <strong>Caudal recomendado:</strong> {{
+                tankInfo.caudalRecomendado }} L/h
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+      <filter-modal
+        v-if="showModal"
+        :filtro="selectedFilter"
+        @close="closeModal"
+      ></filter-modal>
     </div>
 
-    <main class="main-content">
-      <section class="calculator-section">
-        <div class="input-selector">
-          <button @click="switchInputMode('dimensions')" :class="{ active: inputMode === 'dimensions' }" class="tab-button" data-input="dimensions">Por Dimensiones</button>
-          <button @click="switchInputMode('volume')" :class="{ active: inputMode === 'volume' }" class="tab-button" data-input="volume">Por Volumen</button>
-        </div>
-
-        <form id="calculatorForm" class="calculator-form" @submit.prevent="handleFormSubmit"> 
-          <div id="dimensionsInput" :class="{ active: inputMode === 'dimensions' }" class="input-group">
-            <div class="form-group">
-              <label for="length">Largo (cm)</label>
-              <input type="number" id="length" name="length" v-model.number="length" min="1" step="0.1" :required="inputMode === 'dimensions'" aria-label="Largo del acuario en centímetros" placeholder="Ej: 100">
-            </div>
-            <div class="form-group">
-              <label for="width">Ancho (cm)</label>
-              <input type="number" id="width" name="width" v-model.number="width" min="1" step="0.1" :required="inputMode === 'dimensions'" aria-label="Ancho del acuario en centímetros" placeholder="Ej: 40">
-            </div>
-            <div class="form-group">
-              <label for="height">Alto (cm)</label>
-              <input type="number" id="height" name="height" v-model.number="height" min="1" step="0.1" :required="inputMode === 'dimensions'" aria-label="Alto del acuario en centímetros" placeholder="Ej: 50">
-            </div>
-          </div>
-
-          <div id="volumeInput" :class="{ active: inputMode === 'volume' }" class="input-group">
-            <div class="form-group">
-              <label for="volume">Volumen (litros)</label>
-              <input type="number" id="volume" name="volume" v-model.number="aquariumVolume" min="1" step="0.1" :required="inputMode === 'volume'" aria-label="Volumen del acuario en litros" placeholder="Ej: 200">
-            </div>
-          </div>
-
-          <button type="submit" class="calculate-button">
-            Calcular <span class="button-icon">→</span>
-          </button>
-        </form>
-      </section>
-
-      <section id="resultsSection" class="results-section" v-if="showResults"> 
-        <div id="summarySection" class="summary-section">
-          <h2>Resumen de Filtros</h2>
-          <p>Total de filtros en base de datos encontrados: <span class="total-filters">{{ stats.totalFilters }}</span></p>
-          <p>Filtros recomendados: <span class="recommended-filters">{{ stats.recommendedFilters }}</span></p>
-          <p>Filtros adecuados: <span class="suitable-filters">{{ stats.suitableFilters }}</span></p>
-          <p>Filtros no recomendados: <span class="unsuitable-filters">{{ stats.unsuitableFilters }}</span></p>
-        </div>
-
-        <div id="specialMessages" class="special-messages">
-          <p v-for="message in specialMessages">{{ message }}</p>
-        </div>
-
-        <div id="error-message" class="error-message" role="alert" v-if="errorMessage">{{ errorMessage }}</div>
-
-        <div class="results-tabs" role="tablist">
-          <button @click="switchResultTab('recomendados')" :class="{ active: currentTab === 'recomendados' }" class="tab-button" data-tab="recomendados" role="tab" aria-selected="true">Recomendados</button>
-          <button @click="switchResultTab('adecuados')" :class="{ active: currentTab === 'adecuados' }" class="tab-button" data-tab="adecuados" role="tab">Adecuados</button>
-          <button @click="switchResultTab('noAdecuados')" :class="{ active: currentTab === 'noAdecuados' }" class="tab-button" data-tab="noAdecuados" role="tab">No Adecuados</button>
-        </div>
-
-        <div class="view-selector" role="toolbar">
-          <button @click="switchView('grid')" :class="{ active: currentView === 'grid' }" class="view-button">🔲</button>
-          <button @click="switchView('list')" :class="{ active: currentView === 'list' }" class="view-button">📋</button>
-          <button @click="switchView('table')" :class="{ active: currentView === 'table' }" class="view-button">📊</button>
-        </div>
-
-        <div id="recomendadosContent" class="tab-content" :class="{ active: currentTab === 'recomendados' }">
-          <div id="filterGridRecomendados" class="filter-container" :class="currentView + '-view'">
-            <filter-card v-for="filtro in filtros.recomendados" :key="filtro.id" :filtro="filtro" :categoria="'recomendados'" @click.native="showFilterDetails(filtro.id)"></filter-card>
-          </div>
-        </div>
-
-        <div id="adecuadosContent" class="tab-content" :class="{ active: currentTab === 'adecuados' }">
-          <div id="filterGridAdecuados" class="filter-container" :class="currentView + '-view'">
-            <filter-card v-for="filtro in filtros.adecuados" :key="filtro.id" :filtro="filtro" :categoria="'adecuados'" @click.native="showFilterDetails(filtro.id)"></filter-card>
-          </div>
-        </div>
-
-        <div id="noAdecuadosContent" class="tab-content" :class="{ active: currentTab === 'noAdecuados' }">
-          <div id="filterGridNoAdecuados" class="filter-container" :class="currentView + '-view'">
-            <filter-card v-for="filtro in filtros.noAdecuados" :key="filtro.id" :filtro="filtro" :categoria="'noAdecuados'" @click.native="showFilterDetails(filtro.id)"></filter-card>
-          </div>
-        </div>
-
-        <div id="tankInfo" class="tank-info">
-          <div class="tank-info-container" v-if="tankInfo">
-            <p><strong>Volumen del acuario:</strong> {{ tankInfo.volumen }} L</p>
-            <p><strong>Caudal recomendado:</strong> {{ tankInfo.caudalRecomendado }} L/h</p>
-          </div>
-        </div>
-
-      </section>
-    </main>
-    <filter-modal v-if="showModal" :filtro="selectedFilter" @close="closeModal"></filter-modal>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-  <script src="scripts.js"></script> 
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="scripts.js"></script>
+  </body>
 </html>

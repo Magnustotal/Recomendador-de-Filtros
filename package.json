@@ -1,0 +1,32 @@
+{
+  "name": "recomendador-de-filtros",
+  "version": "1.0.0",
+  "description": "Aplicación web para recomendar filtros de acuario basados en las dimensiones o el volumen del tanque.",
+  "main": "scripts.js",
+  "scripts": {
+    "lint": "eslint . --ext .js,.vue",
+    "format": "prettier --write \"**/*.{js,vue,css,html,json}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Magnustotal/Recomendador-de-Filtros.git"
+  },
+  "keywords": [
+    "acuario",
+    "filtros",
+    "recomendador",
+    "peceras",
+    "filtracion"
+  ],
+  "author": "J. B. V. <tu_correo@electronico.com> (https://github.com/Magnustotal)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Magnustotal/Recomendador-de-Filtros/issues"
+  },
+  "homepage": "https://github.com/Magnustotal/Recomendador-de-Filtros#readme",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.22.0",
+    "prettier": "^3.2.5"
+  }
+}

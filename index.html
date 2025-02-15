@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -9,6 +9,7 @@
     />
     <meta name="author" content="J. B. V." />
     <meta name="last-modified" content="2025-02-14" />
+
     <meta name="version" content="2.1.1" />
     <title>Recomendador de Filtros para Acuarios</title>
     <link rel="stylesheet" href="styles.css" />
@@ -21,16 +22,17 @@
       </header>
 
       <div id="disclaimerBanner" class="disclaimer-banner">
-        <button @click="hideBanner" class="close-banner" aria-label="Cerrar">
+        <button
+          @click="hideBanner"
+          class="close-banner"
+          aria-label="Cerrar"
+        >
           &times;
         </button>
         <div class="disclaimer-content">
-          <i
-            id="disclaimerIcon"
-            class="disclaimer-icon"
-            aria-label="Información"
-            >{{ currentTip.icon }}</i
-          >
+          <i id="disclaimerIcon" class="disclaimer-icon" aria-label="Información">{{
+            currentTip.icon
+          }}</i>
           <div class="disclaimer-text">
             <p id="disclaimerMessage">{{ currentTip.message }}</p>
           </div>
@@ -156,9 +158,7 @@
             </p>
             <p>
               Filtros recomendados:
-              <span class="recommended-filters"
-                >{{ stats.recommendedFilters }}</span
-              >
+              <span class="recommended-filters">{{ stats.recommendedFilters }}</span>
             </p>
             <p>
               Filtros adecuados:
@@ -166,9 +166,7 @@
             </p>
             <p>
               Filtros no recomendados:
-              <span class="unsuitable-filters"
-                >{{ stats.unsuitableFilters }}</span
-              >
+              <span class="unsuitable-filters">{{ stats.unsuitableFilters }}</span>
             </p>
           </div>
 
@@ -302,12 +300,10 @@
 
           <div id="tankInfo" class="tank-info">
             <div class="tank-info-container" v-if="tankInfo">
+              <p><strong>Volumen del acuario:</strong> {{ tankInfo.volumen }} L</p>
               <p>
-                <strong>Volumen del acuario:</strong> {{ tankInfo.volumen }} L
-              </p>
-              <p>
-                <strong>Caudal recomendado:</strong> {{
-                tankInfo.caudalRecomendado }} L/h
+                <strong>Caudal recomendado:</strong>
+                {{ tankInfo.caudalRecomendado }} L/h
               </p>
             </div>
           </div>
@@ -320,7 +316,6 @@
       ></filter-modal>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script src="scripts.js"></script>
+    <script type="module" src="scripts.js"></script>
   </body>
 </html>

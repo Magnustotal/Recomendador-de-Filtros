@@ -1,17 +1,16 @@
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    node: true,
+{
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 2020, // O la versión de ECMAScript que desees usar
+    "sourceType": "module"
   },
-  extends: ["eslint:recommended", "plugin:vue/essential", "prettier"],
-  overrides: [],
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+  "env": {
+    "browser": true,
+    "es6": true
   },
-  plugins: ["vue"],
-  rules: {
-    "no-unused-vars": "warn",
-  },
-};
+  "rules": {
+    // Puedes añadir o sobreescribir reglas aquí
+    "no-console": "warn", // Advierte sobre el uso de console.log
+    "no-unused-vars": "warn"
+  }
+}

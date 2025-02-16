@@ -2,8 +2,12 @@
   "name": "recomendador-de-filtros",
   "version": "1.0.0",
   "description": "Aplicación web para recomendar filtros de acuario basados en las dimensiones o el volumen del tanque.",
-  "main": "scripts.js",
+  "main": "src/index.html",
   "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url ./",
+    "predeploy": "npm run build",
+    "test": "jest",
     "lint": "eslint . --ext .js,.vue",
     "format": "prettier --write \"**/*.{js,vue,css,html,json}\""
   },
@@ -19,14 +23,22 @@
     "filtracion"
   ],
   "author": "J. B. V. <tu_correo@electronico.com> (https://github.com/Magnustotal)",
-  "license": "ISC",
+  "license": "MIT",  // Considera usar MIT en lugar de ISC, es más común.
   "bugs": {
     "url": "https://github.com/Magnustotal/Recomendador-de-Filtros/issues"
   },
-  "homepage": "https://github.com/Magnustotal/Recomendador-de-Filtros#readme",
+  "homepage": "https://magnustotal.github.io/Recomendador-de-Filtros/",
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.22.0",
-    "prettier": "^3.2.5"
+    "parcel": "^2.11.0",
+    "prettier": "^3.2.5",
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "papaparse": "^5.4.1"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }

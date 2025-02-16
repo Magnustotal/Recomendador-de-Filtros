@@ -1,539 +1,634 @@
 /* Variables CSS */
 :root {
-  --primary-color: #007bff;
-  --secondary-color: #6c757d;
-  --success-color: #28a745;
-  --warning-color: #ffc107;
-  --danger-color: #dc3545;
-  --light-gray: #f5f5f5;
-  --medium-gray: #dee2e6;
-  --dark-gray: #343a40;
-  --font-family: "Arial", sans-serif;
-  --border-radius: 4px;
-  --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  --transition-speed: 0.2s;
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-gray: #f5f5f5;
+    --medium-gray: #dee2e6;
+    --dark-gray: #343a40;
+    --font-family: "Arial", sans-serif;
+    --border-radius: 4px;
+    /* Mejora: Sombra más sutil */
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.2s;
 }
 
 /* Estilos generales */
 body {
-  font-family: var(--font-family);
-  margin: 0;
-  padding: 0;
-  background-color: var(--light-gray);
-  color: #333;
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-gray);
+    color: #333;
+    /* Mejora: Añadido line-height para mejor legibilidad */
+    line-height: 1.6;
 }
 
 /* Container principal */
-.app-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
+/* Eliminado: .app-container ya no es necesario, usamos el padding directamente en body */
 
 /* Cabecera */
 .app-header {
-  text-align: center;
-  margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    /* Mejora: Padding superior e inferior */
+    padding: 20px 0;
+    /* Mejora: Fondo para destacar la cabecera */
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
 }
 
 .app-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
+    margin: 0;
+    font-size: 2.5rem;
 }
 
 .app-version {
-  font-size: 0.9rem;
-  color: var(--secondary-color);
+    font-size: 0.9rem;
+    color: var(--secondary-color);
 }
 
-/* Banner de información (MODIFICADO) */
+/* Banner de información */
 .disclaimer-banner {
-  background-color: #fff3cd;
-  border: 1px solid #ffeeba;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: var(--border-radius);
-  position: relative;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    position: relative;
 }
 
 .disclaimer-content {
-  display: flex;
-  align-items: flex-start;
+    display: flex;
+    align-items: flex-start;
 }
 
 .disclaimer-icon {
-  font-size: 2rem;
-  margin-right: 10px;
+    font-size: 2rem;
+    margin-right: 10px;
 }
 
 .close-banner {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--secondary-color);
-  transition: color var(--transition-speed);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--secondary-color);
+    transition: color var(--transition-speed);
 }
 
 .close-banner:hover {
-  color: var(--dark-gray);
+    color: var(--dark-gray);
 }
 
-/* Botón para siguiente consejo (NUEVO) */
 .next-tip-button {
-  background-color: var(--warning-color);
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  font-size: 0.9rem;
-  margin-top: 10px; /* Espacio entre el texto y el botón */
-  transition: background-color var(--transition-speed);
-  display: block; /* Para que ocupe todo el ancho y se centre */
-  margin-left: auto; /* Centrado horizontal */
-  margin-right: auto;
+    background-color: var(--warning-color);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    transition: background-color var(--transition-speed);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .next-tip-button:hover,
 .next-tip-button:focus {
-  background-color: #e0a800; /* Un tono más oscuro al hacer hover/focus */
-  outline: none;
+    background-color: #e0a800;
+    outline: none;
 }
 
 /* Sección calculadora */
 .calculator-section {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-bottom: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
 }
 
 .input-selector {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.tab-button {
-  background-color: var(--primary-color);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin: 0 5px;
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  transition: background-color var(--transition-speed);
+/* Mejora: Estilos más específicos para los botones de pestaña */
+.input-selector .tab-button {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    border: 1px solid var(--medium-gray); /* Añadido borde */
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0; /* Eliminado margen */
+    border-radius: 0; /* Eliminado border-radius para que encajen */
+    font-size: 1rem;
+    transition: background-color var(--transition-speed), color var(--transition-speed); /* Transición de color */
 }
 
-.tab-button.active {
-  background-color: #0056b3;
+/* Estilo para el botón activo */
+.input-selector .tab-button.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color); /* Borde del mismo color */
 }
 
-.tab-button:hover,
-.tab-button:focus {
-  background-color: #0056b3;
-  outline: none;
+.input-selector .tab-button:hover,
+.input-selector .tab-button:focus {
+    background-color: var(--primary-color); /* Color al hacer hover/focus */
+    color: #fff;
+    outline: none;
+    border-color: var(--primary-color);
 }
+/*Redondeamos solo las esquinas exteriores*/
+.input-selector .tab-button:first-child{
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+.input-selector .tab-button:last-child{
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
 
 .input-group {
-  display: none;
+    display: none;
 }
 
 .input-group.active {
-  display: block;
+    display: block;
 }
 
-.form-group {
-  margin-bottom: 15px;
+/* Mejora: Agrupación de estilos comunes para labels e inputs */
+.form-group label,
+.form-group input {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px; /* Margen inferior solo para el label */
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .form-group input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  box-sizing: border-box;
-  font-size: 1rem;
+    padding: 8px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    font-size: 1rem;
+    /* Mejora: Transición para el borde */
+    transition: border-color var(--transition-speed);
 }
 
 .form-group input:focus {
-  border-color: var(--primary-color);
-  outline: none;
+    border-color: var(--primary-color);
+    outline: none;
 }
 
+/* Mejora: Estilo más específico para el botón de calcular */
 .calculate-button {
-  background-color: var(--success-color);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  display: block;
-  width: 100%;
-  transition: background-color var(--transition-speed);
+    background-color: var(--success-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    display: block;
+    width: 100%;
+    transition: background-color var(--transition-speed);
+    /* Mejora: Margen superior */
+    margin-top: 15px;
 }
 
 .calculate-button:hover,
 .calculate-button:focus {
-  background-color: #218838;
-  outline: none;
+    background-color: #218838;
+    outline: none;
 }
 
 .button-icon {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 /* Sección resultados */
 .results-section {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  margin-bottom: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
 }
 
 .summary-section {
-  text-align: center;
-  margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .summary-section h2 {
-  margin-bottom: 10px;
-  color: var(--primary-color);
-  font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-size: 1.5rem;
 }
 
 .summary-section p {
-  margin: 5px 0;
-  font-size: 1rem;
-  color: #333;
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
 }
 
 .results-tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
+/* Mejora: Estilos más específicos para los botones de pestaña de resultados */
 .results-tabs .tab-button {
-  background-color: var(--secondary-color);
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    border: 1px solid var(--medium-gray);
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0;
+    border-radius: 0;
+    font-size: 1rem;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .results-tabs .tab-button.active {
-  background-color: var(--dark-gray);
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
 }
 
-.results-tabs .tab-button:focus,
-.results-tabs .tab-button:hover {
-  outline: none;
+.results-tabs .tab-button:hover,
+.results-tabs .tab-button:focus {
+    background-color: var(--primary-color);
+    color: #fff;
+      outline: none;
+    border-color: var(--primary-color);
+
 }
 
+/*Redondeamos solo las esquinas exteriores*/
+.results-tabs .tab-button:first-child{
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+.results-tabs .tab-button:last-child{
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
 .view-selector {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
+/* Mejora: Estilos unificados para botones de vista */
 .view-button {
-  background-color: var(--primary-color);
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  margin: 0 5px;
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  transition: background-color var(--transition-speed);
+   background-color: var(--light-gray);
+    color: var(--dark-gray);
+    border: 1px solid var(--medium-gray);
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 0;
+    border-radius: 0;
+    font-size: 1rem;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .view-button.active {
-  background-color: #0056b3;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
 }
 
 .view-button:hover,
 .view-button:focus {
-  background-color: #0056b3;
-  outline: none;
+     background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+    outline: none;
+}
+/*Redondeamos solo las esquinas exteriores*/
+.view-button:first-child{
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+.view-button:last-child{
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 .filter-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Mejora: Alineación a la izquierda */
 }
 
-.filter-container.grid-view .filter-card {
-  flex: 0 1 calc(33.333% - 20px);
-  max-width: calc(33.333% - 20px);
+/* Mejora: Uso de grid en lugar de flex para las tarjetas */
+.filter-container.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive */
+    gap: 20px;
+}
+
+/* Mejora: List-view ahora usa flexbox, más sencillo */
+.filter-container.list-view {
+    flex-direction: column;
 }
 
 .filter-container.list-view .filter-card {
-  flex: 1 1 100%;
-  max-width: 100%;
+    width: 100%; /* Ocupa todo el ancho */
 }
 
-.filter-container.table-view .filter-card {
-  flex: 1 1 100%;
-  max-width: 100%;
-}
-
-/* Media query para pantallas más pequeñas */
-@media (max-width: 768px) {
-  .filter-container.grid-view .filter-card {
-    flex: 0 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 480px) {
-  .filter-container.grid-view .filter-card {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-}
+/* Mejora: Table-view, se definirá en JS, no CSS */
+/* .filter-container.table-view .filter-card {}  <- Se elimina, se hará en JS */
 
 .filter-card {
-  background-color: #f8f9fa;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  padding: 20px;
-  margin: 10px;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: transform var(--transition-speed);
+    background-color: #f8f9fa;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin: 0; /* Eliminado margen */
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed); /* Añadida transición de sombra */
+    /* Mejora: Box-shadow al hacer hover */
+    box-shadow: var(--box-shadow);
 }
 
 .filter-card:hover {
-  transform: scale(1.05);
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
 }
 
 .filter-card.recomendados {
-  border-left: 5px solid var(--success-color);
+    border-left: 5px solid var(--success-color);
 }
 
 .filter-card.adecuados {
-  border-left: 5px solid var(--warning-color);
+    border-left: 5px solid var(--warning-color);
 }
 
 .filter-card.noAdecuados {
-  border-left: 5px solid var(--danger-color);
+    border-left: 5px solid var(--danger-color);
 }
 
 .filter-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .filter-header h3 {
-  margin: 0;
-  font-size: 1.25rem;
+    margin: 0;
+    font-size: 1.25rem;
 }
 
 .status-badge {
-  background-color: var(--secondary-color);
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: var(--border-radius);
-  font-size: 0.85rem;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    font-size: 0.85rem;
 }
 
 .filter-specs {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
+/* Mejora: Flexbox para spec-item */
 .spec-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alineación vertical */
+    margin-bottom: 5px;
+    padding: 5px 0; /* Padding vertical */
+    border-bottom: 1px solid var(--medium-gray); /* Separador */
 }
 
 .spec-label {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .filter-footer {
-  text-align: right;
+    text-align: right;
 }
 
 .affiliate-button {
-  background-color: #ff9900;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: var(--border-radius);
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: background-color var(--transition-speed);
+     background-color: var(--warning-color);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .affiliate-button.amazon {
-  background-color: #ff9900;
+    background-color: #ff9900;
 }
 
 .affiliate-button:hover,
 .affiliate-button:focus {
-  background-color: #cc7a00;
-  outline: none;
+   background-color: #cc7a00;
+    outline: none;
 }
+
 /* Información del tanque */
-
 .tank-info p {
-  margin: 5px 0;
-  font-size: 1rem;
+    margin: 5px 0;
+    font-size: 1rem;
 }
 
-/* Estadísticas de filtros */
-.stats-container {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-label {
-  display: block;
-  font-weight: bold;
-}
-
-.stat-value {
-  font-size: 1.5rem;
-  color: var(--primary-color);
-}
+/* Eliminado: .stats-container y .stat-item, se manejará con flexbox en JS */
 
 /* Modal */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding-top: 60px;
+    display: none; /* Por defecto oculto, se controla con JS */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 60px;
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 800px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  border-radius: var(--border-radius);
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius);
 }
 
 .close-modal {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color var(--transition-speed);
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition-speed);
 }
 
 .close-modal:hover,
 .close-modal:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-  outline: none;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
 }
 
-/* Filtration bars (dentro del modal, estilos más específicos) */
+/* Filtration bars (dentro del modal) */
 .filtration-bars {
-  display: flex;
-  height: 20px;
-  margin-bottom: 10px;
+    display: flex;
+    height: 20px;
+    margin-bottom: 10px;
 }
 
 .filtration-bar {
-  height: 100%;
+    height: 100%;
 }
 
 .biological {
-  background-color: var(--success-color);
+    background-color: var(--success-color);
 }
 
 .mechanical {
-  background-color: var(--primary-color);
+    background-color: var(--primary-color);
+}
+
+/* Mejora: Añadida clase para la filtración química */
+.chemical {
+    background-color: var(--warning-color);
 }
 
 .bar-label {
-  font-size: 0.8rem;
-  line-height: 20px;
-  padding-left: 5px;
-  color: white;
+    font-size: 0.8rem;
+    line-height: 20px;
+    padding-left: 5px;
+    color: white;
 }
 
 .filtration-notes {
-  font-size: 0.8rem;
-  color: #555;
+    font-size: 0.8rem;
+    color: #555;
 }
 
 /* Detalles del filtro dentro del modal */
 .filter-details h2 {
-  font-size: 1.75rem;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
+    font-size: 1.75rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Mejora: Agrupación de estilos para las especificaciones detalladas */
+.filter-specs-detailed .spec-group {
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--medium-gray);
+    padding-bottom: 10px;
 }
 
 .filter-specs-detailed .spec-group h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: var(--secondary-color);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.filter-specs-detailed .spec-item {
+     display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
 }
 
 .filter-specs-detailed p {
-  margin: 5px 0;
-  font-size: 1rem;
+    margin: 5px 0;
+    font-size: 1rem;
 }
 
 .filtration-recommendation h3 {
-  font-size: 1.1rem;
-  margin-top: 1rem;
+    font-size: 1.1rem;
+    margin-top: 1rem;
 }
 
 /* Error message */
 .error-message {
-  display: none;
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-  padding: 10px;
-  border-radius: var(--border-radius);
-  margin-bottom: 20px;
+    /* Eliminado: display: none; se controla con Vue.js */
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
 }
 
 /* Mejoras para pantallas pequeñas (responsive) */
 @media (max-width: 768px) {
-  .app-header h1 {
-    font-size: 2rem;
-  }
-  .modal-content {
-    width: 95%;
-  }
+    .app-header h1 {
+        font-size: 2rem;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+
+    /* Mejora: Ajuste para los botones de filtro en pantallas pequeñas */
+    .filter-card {
+        padding: 15px;
+    }
+
+    /* Mejora: Ajustes para la sección de filtrado dentro del modal */
+    .filter-specs-detailed .spec-group {
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+
+    .filtration-bars {
+        height: 15px; /* Barras más pequeñas en pantallas pequeñas */
+    }
+
+    .bar-label {
+        font-size: 0.7rem; /* Texto más pequeño */
+        line-height: 15px;
+    }
+    .input-selector, .results-tabs, .view-selector{
+        flex-wrap: wrap;
+    }
+    .input-selector .tab-button, .results-tabs .tab-button,  .view-selector .view-button{
+        flex: 1 1 48%;
+        margin-bottom: .5rem;
+
+    }
+    .input-selector .tab-button:first-child, .results-tabs .tab-button:first-child,  .view-selector .view-button:first-child{
+        border-radius: var(--border-radius)  var(--border-radius) 0  0 ;
+    }
+    .input-selector .tab-button:last-child, .results-tabs .tab-button:last-child,  .view-selector .view-button:last-child{
+        border-radius:  0 0  var(--border-radius) var(--border-radius);
+    }
+}
+
+/* Mejora: Añadido media query para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .input-selector .tab-button, .results-tabs .tab-button,  .view-selector .view-button{
+        flex: 1 1 100%;
+        border-radius: var(--border-radius);
+    }
 }

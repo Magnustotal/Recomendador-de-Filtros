@@ -2,7 +2,6 @@
   "name": "recomendador-de-filtros",
   "version": "1.0.0",
   "description": "Aplicación web para recomendar filtros de acuario basados en las dimensiones o el volumen del tanque.",
-  "main": "src/index.html",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html --public-url ./",

@@ -23,7 +23,7 @@
     "filtracion"
   ],
   "author": "J. B. V. <tu_correo@electronico.com> (https://github.com/Magnustotal)",
-  "license": "MIT",  // Considera usar MIT en lugar de ISC, es más común.
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Magnustotal/Recomendador-de-Filtros/issues"
   },
